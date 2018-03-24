@@ -38,12 +38,27 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
                     is_done = True
                     break
     
+    root_download_path = "../twitter-downloads/"
+    counter = 0
     output_data = {}
     if found_user:
+        media_files = list()
+        posted_tweets = api.user_timeline(found_user.id_str, count=1000)
+        for status in posted_tweets:
+            media = status.entities.get('media', [])
+            if(len(media) > 0):
+                media_files.append(media[0]['media_url'])
+                path_to_download = root_download_path + input_first_name + "-" + input_last_name + "-" + input_email + str(counter) + ".jpg"
+                urllib.urlretrieve(url, path_to_download)
+                counter += 1
+                if len(media_files) is 10:
+                    break
+
         output_data['number_of_followers'] = found_user.followers_count
         output_data['link_to_profile_picture'] = found_user.profile_image_url.replace('_normal', '')
         output_data['profile_description'] = found_user.description
         output_data['location'] = found_user.location
         output_data['creation_date'] = found_user.created_at
         output_data['linkToProfile'] = found_user.url
+        output_data['linksToPictures'] = media_files
     return output_data
