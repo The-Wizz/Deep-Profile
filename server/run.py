@@ -5,6 +5,7 @@ from flask import Flask
 from flask import request
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
+from util import prepare_request
 
 from api.hello import hello_world
 
@@ -18,7 +19,7 @@ app.config['UPLOAD_FOLDER'] = './uploads'
 # TODO remove this
 @app.route('/api/hello', methods=['POST'])
 def hello():
-    return hello_world(app, request)
+    return hello_world(prepare_request(app, request))
 
 
 
