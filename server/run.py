@@ -10,6 +10,7 @@ from flask import jsonify
 
 from api.hello import hello_world
 from api.tweepy_recognition import get_twitter
+from api.instagram_recognition import get_instagram
 
 
 app = Flask(__name__)
@@ -29,6 +30,12 @@ def hello():
 def get_twitter_data():
     input_data = prepare_request(app, request)
     output_data = get_twitter(input_data['firstname'], input_data['lastname'], input_data['email'], input_data['image'])
+    return jsonify(output_data)
+
+@app.route('/api/instagram', methods=['POST'])
+def get_instagram_data():
+    input_data = prepare_request(app, request)
+    output_data = get_instagram(input_data['instagram'], input_data['image'])
     return jsonify(output_data)
 
 # For show uploaded pictures
