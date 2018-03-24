@@ -159,7 +159,7 @@
 
                         axios.post("http://127.0.0.1:5000/api/twitter", formData)
                         .then(response => {
-                            this.facebook = response.data
+                            this.twitter = response.data
                         })
                         .catch(e => {
                             console.error(e)
@@ -168,7 +168,7 @@
 
                         axios.post("http://127.0.0.1:5000/api/linkedin", formData)
                         .then(response => {
-                            this.facebook = response.data
+                            this.linkedin = response.data
                         })
                         .catch(e => {
                             console.error(e)
@@ -177,7 +177,7 @@
 
                         axios.post("http://127.0.0.1:5000/api/instagram", formData)
                         .then(response => {
-                            this.facebook = response.data
+                            this.instagram = response.data
                         })
                         .catch(e => {
                             console.error(e)
