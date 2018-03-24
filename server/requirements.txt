@@ -1,0 +1,4 @@
+# Eve==0.7.6
+Flask==0.12.2
+werkzeug==0.14.1
+flask_cors==3.0.3

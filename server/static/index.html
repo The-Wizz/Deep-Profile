@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>My first Bootstrap-Vue app</title>
+
+    <!-- Required Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+
+    <style>
+        html,
+        body,
+        div#app,
+        .h100 {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <b-row class="h100">
+            <b-col cols="4" style="border-right: 1px solid black;" class="h100">
+                <b-container style="margin-top: 30px;" class="h100">
+                    <h1>
+                        Golden Profile
+                    </h1>
+                    <b-form @submit="onSubmit">
+                        <b-form-group label="First name">
+                            <b-form-input v-model.trim="form.firstname"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Last name">
+                            <b-form-input v-model.trim="form.lastname"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="E-Mail Address">
+                            <b-form-input v-model.trim="form.email"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Birthday">
+                            <b-form-input v-model.trim="form.birthday"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Keywords">
+                            <b-form-input v-model.trim="form.keywords"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Address">
+                            <b-form-input v-model.trim="form.address"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Image">
+                            <b-form-file v-model.trim="form.image" accept="image/*"></b-form-file>
+                        </b-form-group>
+                        <b-form-group>
+                            <b-button type="submit">Submit</b-button>
+                        </b-form-group>
+                        * Required
+                    </b-form>
+                </b-container>
+            </b-col>
+            <b-col cols="8">
+                <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+            </b-col>
+        </b-row>
+    </div>
+
+
+        <!-- Required scripts -->
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+        <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+
+
+        <!-- Start running your app -->
+        <script>
+            window.app = new Vue({
+                el: "#app",
+
+                data() {
+                    return {
+                        form: {
+                            firstname: "",
+                            lastname: "",
+                            email: "",
+                            birthday: "",
+                            keywords: "",
+                            address: "",
+                            image: ""
+                        }
+                    }
+                },
+
+                methods: {
+                    onSubmit(evt) {
+                        evt.preventDefault();
+
+                        let projectIcon = new FormData();
+
+                        projectIcon.append('firstname', this.form.firstname);
+                        projectIcon.append('lastname', this.form.lastname);
+                        projectIcon.append('email', this.form.email);
+                        projectIcon.append('birthday', this.form.birthday);
+                        projectIcon.append('keywords', this.form.keywords);
+                        projectIcon.append('address', this.form.address);
+                        projectIcon.append('file', this.form.image);
+
+                        axios.post("http://127.0.0.1:5000/api/hello", projectIcon).then(function (response) {
+                            console.log(response.data);
+                        });
+
+                        // console.log(this.form);
+/**
+                        axios.post('http://fubar.de', {
+                            body: this.postBody
+                        })
+                        .then(response => {
+                            console.log(response)
+                        })
+                        .catch(e => {
+                            this.errors.push(e)
+                        }) **/
+                    }
+                }
+            })
+        </script>
+</body>
+</html>
