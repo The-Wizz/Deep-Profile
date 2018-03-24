@@ -111,7 +111,7 @@
                         projectIcon.append('address', this.form.address);
                         projectIcon.append('image', this.form.image);
 
-                        axios.post("http://127.0.0.1:5000/api/hello", projectIcon).then(function (response) {
+                        axios.post("http://127.0.0.1:5000/api/twitter", projectIcon).then(function (response) {
                             console.log(response.data);
                         });
 
