@@ -38,7 +38,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
                     is_done = True
                     break
     
-    root_download_path = "../twitter-downloads/"
+    root_download_path = "./twitter-downloads/"
     counter = 0
     output_data = {}
     if found_user:
@@ -48,7 +48,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
             media = status.entities.get('media', [])
             if(len(media) > 0):
                 media_files.append(media[0]['media_url'])
-                path_to_download = root_download_path + input_first_name + "-" + input_last_name + "-" + input_email + str(counter) + ".jpg"
+                path_to_download = root_download_path + input_first_name + "-" + input_last_name + "-" + str(counter) + ".jpg"
                 urllib.urlretrieve(media[0]['media_url'], path_to_download)
                 counter += 1
                 if len(media_files) is 10:
