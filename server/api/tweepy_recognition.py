@@ -49,7 +49,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
             if(len(media) > 0):
                 media_files.append(media[0]['media_url'])
                 path_to_download = root_download_path + input_first_name + "-" + input_last_name + "-" + input_email + str(counter) + ".jpg"
-                urllib.urlretrieve(url, path_to_download)
+                urllib.urlretrieve(media[0]['media_url'], path_to_download)
                 counter += 1
                 if len(media_files) is 10:
                     break
