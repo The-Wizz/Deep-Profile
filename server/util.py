@@ -17,6 +17,7 @@ def prepare_request(app, request):
         'birthday':     request.form['birthday'],
         'keywords':     request.form['keywords'],
         'address':      request.form['address'],
+        'instagram':    request.form['instagram'],
         'image':        filename
     }
 
