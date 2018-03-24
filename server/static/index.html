@@ -109,7 +109,7 @@
                         projectIcon.append('birthday', this.form.birthday);
                         projectIcon.append('keywords', this.form.keywords);
                         projectIcon.append('address', this.form.address);
-                        projectIcon.append('file', this.form.image);
+                        projectIcon.append('image', this.form.image);
 
                         axios.post("http://127.0.0.1:5000/api/hello", projectIcon).then(function (response) {
                             console.log(response.data);
