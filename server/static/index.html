@@ -20,6 +20,18 @@
         .h100 {
             height: 100%;
         }
+
+        #linkedin,
+        #facebook,
+        #twitter {
+            padding: 30px;
+            border-bottom: 1px solid black
+        }
+
+        #instagram {
+            padding: 30px;
+        }
+
     </style>
 </head>
 
@@ -50,6 +62,9 @@
                         <b-form-group label="Address">
                             <b-form-input v-model.trim="form.address"></b-form-input>
                         </b-form-group>
+                        <b-form-group label="Instagram Name">
+                            <b-form-input v-model.trim="form.instagram"></b-form-input>
+                        </b-form-group>
                         <b-form-group label="Image">
                             <b-form-file v-model.trim="form.image" accept="image/*"></b-form-file>
                         </b-form-group>
@@ -61,7 +76,23 @@
                 </b-container>
             </b-col>
             <b-col cols="8">
-                <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+
+                <div id="linkedin">
+                    <h2>Linkedin</h2>
+                    {{ linkedin | pretty }}
+                </div>
+                <div id="facebook">
+                    <h2>Facebook</h2>
+                    {{ facebook | pretty }}
+                </div>
+                <div id="twitter">
+                    <h2>Twitter</h2>
+                    {{ twitter | pretty }}
+                </div>
+                <div id="instagram">
+                    <h2>Instagram</h2>
+                    {{ instagram | pretty }}
+                </div>
             </b-col>
         </b-row>
     </div>
@@ -73,6 +104,7 @@
         <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/http-vue-loader"></script>
 
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
@@ -83,50 +115,80 @@
             window.app = new Vue({
                 el: "#app",
 
-                data() {
-                    return {
-                        form: {
-                            firstname: "",
-                            lastname: "",
-                            email: "",
-                            birthday: "",
-                            keywords: "",
-                            address: "",
-                            image: ""
-                        }
-                    }
+                data: {
+                    form: {
+                        firstname: "",
+                        lastname: "",
+                        email: "",
+                        birthday: "",
+                        keywords: "",
+                        address: "",
+                        instagram: "",
+                        image: ""
+                    },
+                    twitter: {},
+                    facebook: {},
+                    instagram: {},
+                    linkedin: {}
                 },
 
                 methods: {
                     onSubmit(evt) {
                         evt.preventDefault();
 
-                        let projectIcon = new FormData();
+                        let formData = new FormData();
 
-                        projectIcon.append('firstname', this.form.firstname);
-                        projectIcon.append('lastname', this.form.lastname);
-                        projectIcon.append('email', this.form.email);
-                        projectIcon.append('birthday', this.form.birthday);
-                        projectIcon.append('keywords', this.form.keywords);
-                        projectIcon.append('address', this.form.address);
-                        projectIcon.append('image', this.form.image);
+                        formData.append('firstname', this.form.firstname);
+                        formData.append('lastname', this.form.lastname);
+                        formData.append('email', this.form.email);
+                        formData.append('birthday', this.form.birthday);
+                        formData.append('keywords', this.form.keywords);
+                        formData.append('address', this.form.address);
+                        formData.append('instagram', this.form.instagram);
+                        formData.append('image', this.form.image);
 
-                        axios.post("http://127.0.0.1:5000/api/twitter", projectIcon).then(function (response) {
-                            console.log(response.data);
-                        });
 
-                        // console.log(this.form);
-/**
-                        axios.post('http://fubar.de', {
-                            body: this.postBody
-                        })
+                        axios.post("http://127.0.0.1:5000/api/facebook", formData)
                         .then(response => {
-                            console.log(response)
+                            this.facebook = response.data
                         })
                         .catch(e => {
-                            this.errors.push(e)
-                        }) **/
+                            console.error(e)
+                        })
+
+
+                        axios.post("http://127.0.0.1:5000/api/twitter", formData)
+                        .then(response => {
+                            this.facebook = response.data
+                        })
+                        .catch(e => {
+                            console.error(e)
+                        })
+
+
+                        axios.post("http://127.0.0.1:5000/api/linkedin", formData)
+                        .then(response => {
+                            this.facebook = response.data
+                        })
+                        .catch(e => {
+                            console.error(e)
+                        })
+
+
+                        axios.post("http://127.0.0.1:5000/api/instagram", formData)
+                        .then(response => {
+                            this.facebook = response.data
+                        })
+                        .catch(e => {
+                            console.error(e)
+                        })
                     }
+                },
+
+                filters: {
+                  pretty: function(value) {
+                    return JSON.stringify(value, null, 2);
+                  }
                 }
             })
         </script>
