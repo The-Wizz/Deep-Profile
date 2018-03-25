@@ -1,3 +1,10 @@
+server/twitter-downloads/
+server/instagram-downloads/
+server/uploads/
+
+
+
+
 
 # Created by https://www.gitignore.io/api/macos,python,jupyternotebook
 
@@ -136,7 +143,3 @@ venv.bak/
 
 
 # End of https://www.gitignore.io/api/macos,python,jupyternotebook
-
-twitter-downloads/
-
-server/instagram-downloads/
