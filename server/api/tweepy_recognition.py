@@ -23,10 +23,10 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
 
         url = url.replace('_normal', '')
 
-        path_to_unkown_picture = input_first_name + "-" + input_last_name + "-" + "twitter" + ".jpg"
+        path_to_unknown_picture = input_first_name + "-" + input_last_name + "-" + "twitter" + ".jpg"
 
-        urllib.urlretrieve(url, path_to_unkown_picture)
-        unknown_image = face_recognition.load_image_file(path_to_unkown_picture)
+        urllib.urlretrieve(url, path_to_unknown_picture)
+        unknown_image = face_recognition.load_image_file(path_to_unknown_picture)
 
         is_done = False
         for recognized_face_know_face in known_faces:
@@ -39,7 +39,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
                     found_user = current_searching_user
                     is_done = True
                     break
-    
+
     root_download_path = "./twitter-downloads/"
     counter = 0
     output_data = {}
@@ -53,7 +53,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
                 path_to_download = root_download_path + input_first_name + "-" + input_last_name + "-" + str(counter) + ".jpg"
                 urllib.urlretrieve(media[0]['media_url'], path_to_download)
                 counter += 1
-                wasnt_found = True
+                was_not_found = True
                 for known_face in known_faces:
                     try:
                         unknown_image = face_recognition.load_image_file(path_to_download)
@@ -63,15 +63,15 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
                     for unknown_face in unknown_faces:
                         result = face_recognition.compare_faces([known_face], unknown_face)
                         if True in result:
-                            wasnt_found = False
-                if wasnt_found:
+                            was_not_found = False
+                if was_not_found:
                     os.remove(path_to_download)
                     media_files.remove(media[0]['media_url'])
                 print str(len(media_files))
                 if len(media_files) is 20:
                     print "maximum of 20 reached"
                     break
-                
+
 
         output_data['number_of_followers'] = found_user.followers_count
         output_data['link_to_profile_picture'] = found_user.profile_image_url.replace('_normal', '')

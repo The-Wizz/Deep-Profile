@@ -328,17 +328,25 @@
             </div>
             <div id="twitter">
                 <h1>Twitter</h1>
+                <br />
+                <strong>On Twitter since: </strong><span id="twitterCreation"></span><br />
+                <strong>Followers: </strong><span id="twitterFollower"></span><br />
+                <strong>Locations: </strong><span id="twitterLocation"></span><br />
+                <br />
+                <strong>Profile description:</strong><br />
+                <span id="twitterDescription"></span><br />
+                <br />
+                <br />
+                <h4>Media from Twitter:</h4>
                 <div id="twitterImages" class="gallery-slider" style="height: 300px !important;">
                 </div>
             </div>
             <div id="instagram">
                 <h1>Instagram</h1>
 
-                <div class="gallery-slider" style="height: 300px !important;">
-                    <div class="gallery-slider__images" style="height: 300px !important;">
-                        <div id="instagramImages">
-                        </div>
-                    </div>
+                <br />
+                <h4>Media from Instagram:</h4>
+                <div id="instagramImages" class="gallery-slider" style="height: 300px !important;">
                 </div>
             </div>
         </div>
@@ -378,7 +386,7 @@
                     data.linksToPictures.forEach(function(element) {
                         imageGalerie += '<div class="item">' +
                             '<div class="img-fill">' +
-                                '<img data-lazy="' + element + '" alt="" height="300">' +
+                                '<img src="' + element + '" alt="" height="300">' +
                             '</div>' +
                         '</div>';
                     });
@@ -386,7 +394,7 @@
                     $("#twitterImages").html(imageGalerie);
 
                     $("#twitterImages").slick({
-                        speed: 1000,
+                        speed: 5000,
                         slidesToShow: 3,
                         slidesToScroll: 1,
                         centerMode: true,
@@ -394,10 +402,14 @@
                         cssEase: 'linear',
                         draggable: true,
                         autoplay: true,
-                        autoplaySpeed: 2500,
+                        autoplaySpeed: 0,
                         variableWidth: true,
-                        lazyLoad: 'ondemand',
                     });
+
+                    $("#twitterCreation").html(data.creation_date);
+                    $("#twitterFollower").html(data.number_of_followers);
+                    $("#twitterLocation").html(data.location);
+                    $("#twitterDescription").html(data.profile_description);
                 }
             });
 
@@ -413,7 +425,7 @@
                     data.pictures.forEach(function(element) {
                         imageGalerie += '<div class="item">' +
                             '<div class="img-fill">' +
-                                '<img data-lazy="' + element + '" alt="" height="300">' +
+                                '<img src="' + element + '" alt="" height="300">' +
                             '</div>' +
                         '</div>';
                     });
@@ -421,7 +433,7 @@
                     $("#instagramImages").html(imageGalerie);
 
                     $("#instagramImages").slick({
-                        speed: 1000,
+                        speed: 5000,
                         slidesToShow: 3,
                         slidesToScroll: 1,
                         centerMode: true,
@@ -429,9 +441,8 @@
                         cssEase: 'linear',
                         draggable: true,
                         autoplay: true,
-                        autoplaySpeed: 2500,
+                        autoplaySpeed: 0,
                         variableWidth: true,
-                        lazyLoad: 'ondemand',
                     });
                 }
             });
