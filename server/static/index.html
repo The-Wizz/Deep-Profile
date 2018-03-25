@@ -17,6 +17,8 @@
 
 
     <style>
+        .dn { display: none; }
+
         html,
         body,
         div#app,
@@ -43,310 +45,341 @@
             border-bottom: 1px dotted darkgray;
             text-align: right;
         }
+
+        #welcomePanel h1 {
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-    <div class="row h100">
-        <div class="h100 col-3" style="border-right: 1px solid black;">
-            <div class="h100 container" style="margin-top: 30px;">
-                <h1 style="text-align: center !important;">
-                    Golden Profile
-                </h1>
-                <form class="">
-                    <fieldset role="group" class="b-form-group form-group">
-                        <legend class="col-form-label pt-0">First name</legend>
-                        <input id="inpFirstname" type="text" class="form-control" value="Florian">
-                    </fieldset>
-                    <fieldset role="group" class="b-form-group form-group">
-                        <legend class="col-form-label pt-0">Last name</legend>
-                        <input id="inpLastname" type="text" class="form-control" value="Rusch">
-                    </fieldset>
-                    <fieldset role="group" class="b-form-group form-group">
-                        <legend class="col-form-label pt-0">E-Mail Address</legend>
-                        <input id="inpEmail" type="text" class="form-control" value="fubar@test.de">
-                    </fieldset>
-                    <fieldset role="group" class="b-form-group form-group">
-                        <legend class="col-form-label pt-0">Birthday</legend>
-                        <input id="inpBirthday" type="text" class="form-control">
-                    </fieldset>
-                    <fieldset role="group" class="b-form-group form-group">
-                        <legend class="col-form-label pt-0">Keywords</legend>
-                        <input id="inpKeywords" type="text" class="form-control">
-                    </fieldset>
-                    <fieldset role="group" class="b-form-group form-group">
-                        <legend class="col-form-label pt-0">Address</legend>
-                        <input id="inpAddress" type="text" class="form-control">
-                    </fieldset>
-                    <fieldset role="group" class="b-form-group form-group">
-                        <legend class="col-form-label pt-0">Instagram Name</legend>
-                        <input id="inpInstagram" type="text" class="form-control">
-                    </fieldset>
-                    <fieldset role="group" class="b-form-group form-group">
-                        <legend class="col-form-label pt-0">Image</legend>
-                        <div class="custom-file b-form-file">
-                            <input type="file" class="form-control-file" accept="image/*" id="inpImage">
-                        </div>
-                    </fieldset>
-                    <fieldset role="group" class="b-form-group form-group">
-                        <button id="btnSubmit" type="submit" class="btn btn-secondary">Submit</button>
-                    </fieldset>
-                    * Required
-                </form>
-            </div>
-        </div>
-
-
-
-
-        <div class="col-9" style="height: 100%; overflow:scroll">
-            <div id="linkedin">
-                <h1>Linkedin</h1>
-
-                <h3>Florian Rusch
-                    <span style="font-size:13px;">
-                        61
-                        <i class="fa fa-users" aria-hidden="true"></i>
-                    </span>
-                </h3>
-                <h5>Praktikant & Bachelorant bei der cluetec GmbH</h5>
-                <h6>Hochschule Karlsruhe - Technik und Wirtschaft</h6>
-
-                <br />
-                <br />
-                <section id="experience" class="profile-section">
-                    <h2 class="title" style="text-decoration: underline;">Erfahrungen</h2>
-                    <br />
-                    <div class="row">
-                        <div class="col-6">
-                            <header>
-                                <h5 class="item-title">Praktikant &amp; Bachelorant</h5>
-                                <h5 class="item-subtitle">cluetec GmbH</h5>
-                            </header>
-                            <div class="meta">
-                                <span class="date-range">
-                                    <time>März 2018</time> – Heute (1 Monat)
-                                </span>
+    <div class="container-fluid h100">
+        <div class="row h100">
+            <div class="h100 col-3" style="border-right: 1px solid black;">
+                <div class="container" style="margin-top: 30px;">
+                    <h1 style="text-align: center !important;">
+                        Golden Profile
+                    </h1>
+                    <form class="">
+                        <fieldset role="group" class="b-form-group form-group">
+                            <legend class="col-form-label pt-0">First name*</legend>
+                            <input id="inpFirstname" type="text" class="form-control" value="Florian">
+                        </fieldset>
+                        <fieldset role="group" class="b-form-group form-group">
+                            <legend class="col-form-label pt-0">Last name*</legend>
+                            <input id="inpLastname" type="text" class="form-control" value="Rusch">
+                        </fieldset>
+                        <fieldset role="group" class="b-form-group form-group">
+                            <legend class="col-form-label pt-0">E-Mail Address*</legend>
+                            <input id="inpEmail" type="text" class="form-control" value="fubar@test.de">
+                        </fieldset>
+                        <fieldset role="group" class="b-form-group form-group">
+                            <legend class="col-form-label pt-0">Birthday</legend>
+                            <input id="inpBirthday" type="text" class="form-control">
+                        </fieldset>
+                        <fieldset role="group" class="b-form-group form-group">
+                            <legend class="col-form-label pt-0">Address</legend>
+                            <input id="inpAddress" type="text" class="form-control">
+                        </fieldset>
+                        <fieldset role="group" class="b-form-group form-group">
+                            <legend class="col-form-label pt-0">Keywords</legend>
+                            <input id="inpKeywords" type="text" class="form-control">
+                        </fieldset>
+                        <!--fieldset role="group" class="b-form-group form-group">
+                            <legend class="col-form-label pt-0">Instagram Name</legend>
+                            <input id="inpInstagram" type="text" class="form-control">
+                        </fieldset-->
+                        <fieldset role="group" class="b-form-group form-group">
+                            <legend class="col-form-label pt-0">Image*</legend>
+                            <div class="custom-file b-form-file">
+                                <input type="file" class="form-control-file" accept="image/*" id="inpImage">
                             </div>
-                        </div>
-
-
-                        <div class="col-6">
-                            <header>
-                                <h5 class="item-title">Einzelunternehmer</h5>
-                                <h5 class="item-subtitle">Florian Rusch Webservices</h5>
-                            </header>
-                            <div class="meta">
-                                <span class="date-range">
-                                    <time>August 2013</time> – Heute (4 Jahre 8 Monate)
-                                </span>
-                            </div>
-                            <p class="description">Betreuung einer Hand voll Kunden, bei der Verwaltung und Weiterentwicklung ihrer Webseiten und Online-Shops. Auch bei Fragen rund um SEO und Social-Media stehe ich ihnen zur Verfügung.</p>
-                        </div>
-                    </div>
-
-
-                    <hr />
-
-
-                    <div class="row">
-                        <div class="col-6">
-                            <header>
-                                <h5 class="item-title">Praktikant - Solution Experience</h5>
-                                <h5 class="item-subtitle">SAP</h5>
-                            </header>
-                            <div class="meta">
-                                <span class="date-range">
-                                    <time>März 2017</time> –
-                                    <time>August 2017</time> (6 Monate)
-                                </span>
-                            </div>
-                            <p class="description">Praxissemester - Bereich Solution Experience</p>
-                        </div>
-
-
-                        <div class="col-6">
-                            <header>
-                                <h5 class="item-title">Auszubildender Fachinformatiker für Anwendungsentwicklung</h5>
-                                <h5 class="item-subtitle">bitbox GmbH &amp; Co.KG</h5>
-                            </header>
-                            <div class="meta">
-                                <span class="date-range">
-                                    <time>August 2010</time> –
-                                    <time>Juli 2013</time> (3 Jahre)
-                                </span>
-                            </div>
-                            <p class="description">Entwicklung und Programmierung von Webseiten, Online-Shops und IT-Anwendungen im Kunden-Auftrag. Ich wickelte dabei eigenständig die Projekte jeweils in enger Zusammenarbeit mit dem Kunden ab.</p>
-                        </div>
-                    </div>
-                </section>
-
-
-                <br />
-                <br />
-
-
-                <section>
-                    <h2 class="title" style="text-decoration: underline;">Ehrenämter</h2>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="pv-entity__summary-info">
-                                <h4 class="Sans-17px-black-85%-semibold">Internet-Tutor</h4>
-                                <h5 class="item-subtitle">:Domus7 Studenten Wohnheim</h5>
-                                <span class="date-range">Okt. 2014–Heute</span>
-                            </div>
-                            <p class="pv-entity__description Sans-15px-black-70% mt4">
-                                Betreuung des Wohnheim-Netzwerks mit über 170 Bewohnern und über 500 Geräten, sowie Ansprechpartner und Support bei jeglichen Anfragen rund ums Thema Computer, Netzwerk und Internet.
-                            </p>
-                        </div>
-                        <div class="col-6">
-                            <div class="pv-entity__summary-info">
-                                <h4 class="Sans-17px-black-85%-semibold">Vorstand / Finanzen (Gründungsmitglied)</h4>
-                                <h5 class="item-subtitle">KAmpusstarter Karlsruhe (Hochschulgruppe für Gründungsinteressierte)</h5>
-                                <span class="date-range">Dez. 2015–März 2016</span>
-                            </div>
-
-                            <p class="pv-entity__description Sans-15px-black-70% mt4">
-                                Die Hochschulgruppe KAmpusstarter dient als erste Anlaufstelle für Gründungsinteressierte Studenten der Hochschule Karlsruhe - Technik und Wirtschaft.
-                            </p>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="pv-entity__summary-info">
-                                <h4 class="Sans-17px-black-85%-semibold">stellv. EDV-Referent</h4>
-                                <h5 class="item-subtitle">Schützenkreis Bleckede e.V.</h5>
-                                <span class="date-range">Jan. 2014–Jan. 2016</span>
-                            </div>
-                            <p class="pv-entity__description Sans-15px-black-70% mt4">
-                                - Verwaltung der Website (www.sk-bleckede.de)
-                                <br>- Verwaltung und Entwicklung der von mir erstellten Meisterschafts-Software
-                            </p>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="pv-entity__summary-info">
-                                <h4 class="Sans-17px-black-85%-semibold">Kreisjugendsprecher</h4>
-                                <h5 class="item-subtitle">Schützenkreis Bleckede e.V.</h5>
-                                <span class="date-range">Jan. 2011–Dez. 2014</span>
-                            </div>
-                            <p class="pv-entity__description Sans-15px-black-70% mt4">
-                                Jugendarbeit auf Kreisebene.
-                            </p>
-
-                        </div>
-                    </div>
-
-                    <hr />
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="pv-entity__summary-info">
-                                <h4 class="Sans-17px-black-85%-semibold">stellv. Bezirksjugendsprecher</h4>
-                                <h5 class="item-subtitle">Bezirksschützenverband Lüneburg</h5>
-                                <span class="date-range">Jan. 2011–Dez. 2014</span>
-                            </div>
-
-                            <p class="pv-entity__description Sans-15px-black-70% mt4">
-                                Jugendarbeit auf Bezirksebene.
-                            </p>
-                        </div>
-
-
-                        <div class="col-6">
-                            <div class="pv-entity__summary-info">
-                                <h4 class="Sans-17px-black-85%-semibold">Hauptmann der Jungschützenabteilung</h4>
-                                <h5 class="item-subtitle">Schützenverein Dahlenburg</h5>
-                                <span class="date-range">Jan. 2010–Dez. 2013</span>
-                            </div>
-
-                            <p class="pv-entity__description Sans-15px-black-70% mt4">
-                                - Betreuung der Jugendabteilung des Schützenverein Dahlenburg
-                                <br>- Sprachrohr zwischen Jugend und Erwachsenen
-                                <br>- Organisation von Veranstaltungen
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-
-                <br />
-                <br />
-
-
-                <section>
-                    <h2>Kenntnisse</h2>
-                    <h4>Webanwendungen, Web-Entwicklung, WordPress</h4>
-
-                    <br />
-
-                    <div class="row">
-                        <div class="col-6">
-                            <h3>Branchenwissen</h3>
-                            <div>
-                                <span class="badge badge-pill badge-secondary">OOP</span>
-                                <span class="badge badge-pill badge-secondary">Webdesign</span>
-                                <span class="badge badge-pill badge-secondary">Softwareentwicklung</span>
-                                <span class="badge badge-pill badge-secondary">Social Media</span>
-                                <span class="badge badge-pill badge-secondary">Programmierung</span>
-                                <span class="badge badge-pill badge-secondary">Web Development</span>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <h3>Tools & Technologien</h3>
-                            <span class="badge badge-pill badge-secondary">PHP5</span>
-                            <span class="badge badge-pill badge-secondary">HTML5</span>
-                            <span class="badge badge-pill badge-secondary">JavaScript</span>
-                            <span class="badge badge-pill badge-secondary">jQuery</span>
-                            <span class="badge badge-pill badge-secondary">PHP</span>
-                            <span class="badge badge-pill badge-secondary">CSS</span>
-                            <span class="badge badge-pill badge-secondary">XML</span>
-                            <span class="badge badge-pill badge-secondary">JSON</span>
-                            <span class="badge badge-pill badge-secondary">C#</span>
-                            <span class="badge badge-pill badge-secondary">C</span>
-                            <span class="badge badge-pill badge-secondary">Java</span>
-                            <span class="badge badge-pill badge-secondary">LaTeX</span>
-                            <span class="badge badge-pill badge-secondary">SQL</span>
-                            <span class="badge badge-pill badge-secondary">MySQL</span>
-                            <span class="badge badge-pill badge-secondary">Relationale Datenbanken</span>
-                            <span class="badge badge-pill badge-secondary">Adobe Photoshop</span>
-                            <span class="badge badge-pill badge-secondary">Microsoft Office</span>
-                            <span class="badge badge-pill badge-secondary">Microsoft Windows</span>
-                            <span class="badge badge-pill badge-secondary">Linux-Server</span>
-                            <span class="badge badge-pill badge-secondary">Linux</span>
-                            <span class="badge badge-pill badge-secondary">HMTL</span>
-                            <span class="badge badge-pill badge-secondary">AJAX</span>
-                            <span class="badge badge-pill badge-secondary">Databases</span>
-                            <span class="badge badge-pill badge-secondary">Arch Linux</span>
-                            </div>
-                        </div>
-                </section>
-            </div>
-            <div id="twitter">
-                <h1>Twitter</h1>
-                <br />
-                <strong>On Twitter since: </strong><span id="twitterCreation"></span><br />
-                <strong>Followers: </strong><span id="twitterFollower"></span><br />
-                <strong>Locations: </strong><span id="twitterLocation"></span><br />
-                <br />
-                <strong>Profile description:</strong><br />
-                <span id="twitterDescription"></span><br />
-                <br />
-                <br />
-                <h4>Media from Twitter:</h4>
-                <div id="twitterImages" class="gallery-slider" style="height: 300px !important;">
+                        </fieldset>
+                        <fieldset role="group" class="b-form-group form-group">
+                            <button id="btnSubmit" type="submit" class="btn btn-secondary">Submit</button>
+                        </fieldset>
+                        * Required
+                    </form>
                 </div>
             </div>
-            <div id="instagram">
-                <h1>Instagram</h1>
 
-                <br />
-                <h4>Media from Instagram:</h4>
-                <div id="instagramImages" class="gallery-slider" style="height: 300px !important;">
+
+
+
+            <div id="welcomePanel" class="col-9">
+                <div class="container h-100 d-flex">
+                    <div class="jumbotron my-auto" style="width:100%; text-align:center;">
+                        <h1 class="display-3">Golden Profile</h1>
+                        <p class="lead">An approach to collect all available data spread across the internet by the input data of a cv.</p>
+                        <hr class="my-4">
+                        <p>Please fill out the form on the left side.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="outputPanel" class="col-9 dn" style="height: 100%; overflow-y: scroll;">
+                <div id="linkedin">
+                    <h1>Linkedin</h1>
+
+                    <h3>Florian Rusch
+                        <span style="font-size:13px;">
+                            61
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </span>
+                    </h3>
+                    <h5>Praktikant & Bachelorant bei der cluetec GmbH</h5>
+                    <h6>Hochschule Karlsruhe - Technik und Wirtschaft</h6>
+
+                    <br />
+                    <br />
+                    <section id="experience" class="profile-section">
+                        <h2 class="title" style="text-decoration: underline;">Erfahrungen</h2>
+                        <br />
+                        <div class="row">
+                            <div class="col-6">
+                                <header>
+                                    <h5 class="item-title">Praktikant &amp; Bachelorant</h5>
+                                    <h5 class="item-subtitle">cluetec GmbH</h5>
+                                </header>
+                                <div class="meta">
+                                    <span class="date-range">
+                                        <time>März 2018</time> – Heute (1 Monat)
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-6">
+                                <header>
+                                    <h5 class="item-title">Einzelunternehmer</h5>
+                                    <h5 class="item-subtitle">Florian Rusch Webservices</h5>
+                                </header>
+                                <div class="meta">
+                                    <span class="date-range">
+                                        <time>August 2013</time> – Heute (4 Jahre 8 Monate)
+                                    </span>
+                                </div>
+                                <p class="description">Betreuung einer Hand voll Kunden, bei der Verwaltung und Weiterentwicklung ihrer Webseiten und Online-Shops. Auch bei Fragen rund um SEO und Social-Media stehe ich ihnen zur Verfügung.</p>
+                            </div>
+                        </div>
+
+
+                        <hr />
+
+
+                        <div class="row">
+                            <div class="col-6">
+                                <header>
+                                    <h5 class="item-title">Praktikant - Solution Experience</h5>
+                                    <h5 class="item-subtitle">SAP</h5>
+                                </header>
+                                <div class="meta">
+                                    <span class="date-range">
+                                        <time>März 2017</time> –
+                                        <time>August 2017</time> (6 Monate)
+                                    </span>
+                                </div>
+                                <p class="description">Praxissemester - Bereich Solution Experience</p>
+                            </div>
+
+
+                            <div class="col-6">
+                                <header>
+                                    <h5 class="item-title">Auszubildender Fachinformatiker für Anwendungsentwicklung</h5>
+                                    <h5 class="item-subtitle">bitbox GmbH &amp; Co.KG</h5>
+                                </header>
+                                <div class="meta">
+                                    <span class="date-range">
+                                        <time>August 2010</time> –
+                                        <time>Juli 2013</time> (3 Jahre)
+                                    </span>
+                                </div>
+                                <p class="description">Entwicklung und Programmierung von Webseiten, Online-Shops und IT-Anwendungen im Kunden-Auftrag. Ich wickelte dabei eigenständig die Projekte jeweils in enger Zusammenarbeit mit dem Kunden ab.</p>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <br />
+                    <br />
+
+
+                    <section>
+                        <h2 class="title" style="text-decoration: underline;">Ehrenämter</h2>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="pv-entity__summary-info">
+                                    <h4 class="Sans-17px-black-85%-semibold">Internet-Tutor</h4>
+                                    <h5 class="item-subtitle">:Domus7 Studenten Wohnheim</h5>
+                                    <span class="date-range">Okt. 2014–Heute</span>
+                                </div>
+                                <p class="pv-entity__description Sans-15px-black-70% mt4">
+                                    Betreuung des Wohnheim-Netzwerks mit über 170 Bewohnern und über 500 Geräten, sowie Ansprechpartner und Support bei jeglichen Anfragen rund ums Thema Computer, Netzwerk und Internet.
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <div class="pv-entity__summary-info">
+                                    <h4 class="Sans-17px-black-85%-semibold">Vorstand / Finanzen (Gründungsmitglied)</h4>
+                                    <h5 class="item-subtitle">KAmpusstarter Karlsruhe (Hochschulgruppe für Gründungsinteressierte)</h5>
+                                    <span class="date-range">Dez. 2015–März 2016</span>
+                                </div>
+
+                                <p class="pv-entity__description Sans-15px-black-70% mt4">
+                                    Die Hochschulgruppe KAmpusstarter dient als erste Anlaufstelle für Gründungsinteressierte Studenten der Hochschule Karlsruhe - Technik und Wirtschaft.
+                                </p>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="pv-entity__summary-info">
+                                    <h4 class="Sans-17px-black-85%-semibold">stellv. EDV-Referent</h4>
+                                    <h5 class="item-subtitle">Schützenkreis Bleckede e.V.</h5>
+                                    <span class="date-range">Jan. 2014–Jan. 2016</span>
+                                </div>
+                                <p class="pv-entity__description Sans-15px-black-70% mt4">
+                                    - Verwaltung der Website (www.sk-bleckede.de)
+                                    <br>- Verwaltung und Entwicklung der von mir erstellten Meisterschafts-Software
+                                </p>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="pv-entity__summary-info">
+                                    <h4 class="Sans-17px-black-85%-semibold">Kreisjugendsprecher</h4>
+                                    <h5 class="item-subtitle">Schützenkreis Bleckede e.V.</h5>
+                                    <span class="date-range">Jan. 2011–Dez. 2014</span>
+                                </div>
+                                <p class="pv-entity__description Sans-15px-black-70% mt4">
+                                    Jugendarbeit auf Kreisebene.
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="pv-entity__summary-info">
+                                    <h4 class="Sans-17px-black-85%-semibold">stellv. Bezirksjugendsprecher</h4>
+                                    <h5 class="item-subtitle">Bezirksschützenverband Lüneburg</h5>
+                                    <span class="date-range">Jan. 2011–Dez. 2014</span>
+                                </div>
+
+                                <p class="pv-entity__description Sans-15px-black-70% mt4">
+                                    Jugendarbeit auf Bezirksebene.
+                                </p>
+                            </div>
+
+
+                            <div class="col-6">
+                                <div class="pv-entity__summary-info">
+                                    <h4 class="Sans-17px-black-85%-semibold">Hauptmann der Jungschützenabteilung</h4>
+                                    <h5 class="item-subtitle">Schützenverein Dahlenburg</h5>
+                                    <span class="date-range">Jan. 2010–Dez. 2013</span>
+                                </div>
+
+                                <p class="pv-entity__description Sans-15px-black-70% mt4">
+                                    - Betreuung der Jugendabteilung des Schützenverein Dahlenburg
+                                    <br>- Sprachrohr zwischen Jugend und Erwachsenen
+                                    <br>- Organisation von Veranstaltungen
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <br />
+                    <br />
+
+
+                    <section>
+                        <h2>Kenntnisse</h2>
+                        <br />
+                        <h4>Webanwendungen, Web-Entwicklung, WordPress</h4>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-6">
+                                <h3>Branchenwissen</h3>
+                                <div>
+                                    <span class="badge badge-pill badge-secondary">OOP</span>
+                                    <span class="badge badge-pill badge-secondary">Webdesign</span>
+                                    <span class="badge badge-pill badge-secondary">Softwareentwicklung</span>
+                                    <span class="badge badge-pill badge-secondary">Social Media</span>
+                                    <span class="badge badge-pill badge-secondary">Programmierung</span>
+                                    <span class="badge badge-pill badge-secondary">Web Development</span>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <h3>Tools & Technologien</h3>
+                                <span class="badge badge-pill badge-secondary">PHP5</span>
+                                <span class="badge badge-pill badge-secondary">HTML5</span>
+                                <span class="badge badge-pill badge-secondary">JavaScript</span>
+                                <span class="badge badge-pill badge-secondary">jQuery</span>
+                                <span class="badge badge-pill badge-secondary">PHP</span>
+                                <span class="badge badge-pill badge-secondary">CSS</span>
+                                <span class="badge badge-pill badge-secondary">XML</span>
+                                <span class="badge badge-pill badge-secondary">JSON</span>
+                                <span class="badge badge-pill badge-secondary">C#</span>
+                                <span class="badge badge-pill badge-secondary">C</span>
+                                <span class="badge badge-pill badge-secondary">Java</span>
+                                <span class="badge badge-pill badge-secondary">LaTeX</span>
+                                <span class="badge badge-pill badge-secondary">SQL</span>
+                                <span class="badge badge-pill badge-secondary">MySQL</span>
+                                <span class="badge badge-pill badge-secondary">Relationale Datenbanken</span>
+                                <span class="badge badge-pill badge-secondary">Adobe Photoshop</span>
+                                <span class="badge badge-pill badge-secondary">Microsoft Office</span>
+                                <span class="badge badge-pill badge-secondary">Microsoft Windows</span>
+                                <span class="badge badge-pill badge-secondary">Linux-Server</span>
+                                <span class="badge badge-pill badge-secondary">Linux</span>
+                                <span class="badge badge-pill badge-secondary">HMTL</span>
+                                <span class="badge badge-pill badge-secondary">AJAX</span>
+                                <span class="badge badge-pill badge-secondary">Databases</span>
+                                <span class="badge badge-pill badge-secondary">Arch Linux</span>
+                                </div>
+                            </div>
+                    </section>
+                </div>
+                <div id="twitter">
+                    <h1>Twitter</h1>
+
+                    <div id="twitterLoader">
+                        <i class="fa fa-circle-notch fa-spin fa-3x" style="margin-left: 45%; margin-top: 30px"></i>
+                    </div>
+
+                    <div id="twitterData" class="dn">
+                        <br />
+                        <strong>On Twitter since: </strong><span id="twitterCreation"></span><br />
+                        <strong>Followers: </strong><span id="twitterFollower"></span><br />
+                        <strong>Locations: </strong><span id="twitterLocation"></span><br />
+                        <br />
+                        <strong>Profile description:</strong><br />
+                        <span id="twitterDescription"></span><br />
+                        <br />
+                        <br />
+                        <h4>Media from Twitter:</h4>
+                        <div id="twitterImages" class="gallery-slider" style="height: 300px !important;"></div>
+                    </div>
+                </div>
+                <div id="instagram">
+                    <h1>Instagram</h1>
+
+                    <div id="instagramLoader">
+                        <i class="fa fa-circle-notch fa-spin fa-3x" style="margin-left: 45%; margin-top: 30px"></i>
+                    </div>
+
+                    <div id="instagramData" class="dn">
+                        <br />
+                        <h4>Media from Instagram:</h4>
+                        <div id="instagramImages" class="gallery-slider " style="height: 300px !important;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -371,9 +404,12 @@
             formData.append('birthday',  $("#inpBirthday").val());
             formData.append('keywords',  $("#inpKeywords").val());
             formData.append('address',  $("#inpAddress").val());
-            formData.append('instagram',  $("#inpInstagram").val());
+            //formData.append('instagram',  $("#inpInstagram").val());
+            formData.append('instagram', 'florianrusch9297');
             formData.append('image',  $("#inpImage")[0].files[0]);
 
+            $("#welcomePanel").addClass("dn");
+            $("#outputPanel").removeClass("dn");
 
             jQuery.ajax({
                 type: "POST",
@@ -405,6 +441,11 @@
                         autoplaySpeed: 0,
                         variableWidth: true,
                     });
+
+                    setTimeout(function(){
+                        $('#twitterLoader').addClass('dn');
+                        $('#twitterData').removeClass('dn');
+                    }, 6000);
 
                     $("#twitterCreation").html(data.creation_date);
                     $("#twitterFollower").html(data.number_of_followers);
@@ -444,6 +485,11 @@
                         autoplaySpeed: 0,
                         variableWidth: true,
                     });
+
+                    setTimeout(function(){
+                        $('#instagramLoader').addClass('dn');
+                        $('#instagramData').removeClass('dn');
+                    }, 6000);
                 }
             });
         });
