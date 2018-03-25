@@ -1,6 +1,7 @@
 import tweepy
 import urllib
 import face_recognition
+import os
 from flask import jsonify
 from tweepy_connection_helper import initialize_api
 
@@ -12,6 +13,9 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
 
     found_user = None
 
+    known_image = face_recognition.load_image_file("../" + input_path_to_known_picture)
+    known_faces = face_recognition.face_encodings(known_image)
+
     for current_searching_user in users:
         print current_searching_user.name
 
@@ -19,15 +23,13 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
 
         url = url.replace('_normal', '')
 
-        known_image = face_recognition.load_image_file("../" + input_path_to_known_picture)
-
         path_to_unkown_picture = input_first_name + "-" + input_last_name + "-" + "twitter" + ".jpg"
 
         urllib.urlretrieve(url, path_to_unkown_picture)
         unknown_image = face_recognition.load_image_file(path_to_unkown_picture)
 
         is_done = False
-        for recognized_face_know_face in face_recognition.face_encodings(known_image):
+        for recognized_face_know_face in known_faces:
             if is_done:
                 break
             for recognized_face_unknown_face in face_recognition.face_encodings(unknown_image):
@@ -51,8 +53,25 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
                 path_to_download = root_download_path + input_first_name + "-" + input_last_name + "-" + str(counter) + ".jpg"
                 urllib.urlretrieve(media[0]['media_url'], path_to_download)
                 counter += 1
+                wasnt_found = True
+                for known_face in known_faces:
+                    try:
+                        unknown_image = face_recognition.load_image_file(path_to_download)
+                    except IOError:
+                        break
+                    unknown_faces = face_recognition.face_encodings(unknown_image)
+                    for unknown_face in unknown_faces:
+                        result = face_recognition.compare_faces([known_face], unknown_face)
+                        if True in result:
+                            wasnt_found = False
+                if wasnt_found:
+                    os.remove(path_to_download)
+                    media_files.remove(media[0]['media_url'])
+                print str(len(media_files))
                 if len(media_files) is 10:
+                    print "10 is full"
                     break
+                
 
         output_data['number_of_followers'] = found_user.followers_count
         output_data['link_to_profile_picture'] = found_user.profile_image_url.replace('_normal', '')
