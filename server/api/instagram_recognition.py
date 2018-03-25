@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Sat Mar 24 23:35:51 2018
@@ -38,7 +37,7 @@ def get_instagram(input_instagram, input_path_to_known_picture, input_firstname,
     root_download_path = "./instagram-downloads/"
 
     counter = 0
-    for url_to_image in imagesURL:
+    for url_to_image in imagesURL[:]:
         path_to_download = root_download_path + input_firstname + "-" + input_lastname + "-" + input_email + str(counter) + ".jpg"
         urllib.urlretrieve(url_to_image, path_to_download)
         counter += 1
@@ -54,6 +53,7 @@ def get_instagram(input_instagram, input_path_to_known_picture, input_firstname,
                 if True in result:
                     wasnt_found = False
             if wasnt_found:
+                imagesURL.remove(url_to_image)
                 os.remove(path_to_download)
 
     output_data = {}
