@@ -48,7 +48,8 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
         media_files = list()
         posted_tweets = api.user_timeline(found_user.id_str, count=1000)
         for status in posted_tweets:
-            tweets.append(str(status).decode("utf-8"))
+            if len(tweets) <= 100:
+                tweets.append(str(status).decode("utf-8"))
             media = status.entities.get('media', [])
             if(len(media) > 0):
                 media_files.append(media[0]['media_url'])
@@ -83,5 +84,4 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
         output_data['linkToProfile'] = found_user.url
         output_data['linksToPictures'] = media_files
         output_data['tweets'] = tweets
-        print output_data['tweets']
     return output_data
