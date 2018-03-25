@@ -18,7 +18,7 @@ def get_user_id(username):
     return user_id
 
 
-def get_instagram(input_instagram, input_path_to_known_picture):
+def get_instagram(input_instagram, input_path_to_known_picture, input_firstname, input_lastname, input_email):
     user_name = 'yellowrain184'
     password = 'opencodes'
     api = Client(user_name, password)
@@ -29,8 +29,18 @@ def get_instagram(input_instagram, input_path_to_known_picture):
     imagesURL = []
     for count,item in enumerate(items):
         image_versions2 = item['image_versions2']['candidates']
-        image = image_versions2[0]['url']
-        imagesURL.append(image)
+        image_url = image_versions2[0]['url']
+        imagesURL.append(image_url)
+
+    known_image = face_recognition.load_image_file("../" + input_path_to_known_picture)
+    known_faces = face_recognition.face_encodings(known_image)
+    root_download_path = "./instagram-downloads/"
+
+    counter = 0
+    for url_to_image in imagesURL:
+        path_to_download = root_download_path + input_firstname + "-" + input_lastname + "-" + input_email + str(counter) + ".jpg"
+        urllib.urlretrieve(url_to_image, path_to_download)
+
     output_data = {}
     output_data["pictures"]=imagesURL
     return output_data

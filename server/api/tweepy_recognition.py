@@ -69,7 +69,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
                     media_files.remove(media[0]['media_url'])
                 print str(len(media_files))
                 if len(media_files) is 20:
-                    print "10 is full"
+                    print "maximum of 20 reached"
                     break
                 
 

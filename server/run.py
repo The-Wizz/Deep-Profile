@@ -35,7 +35,7 @@ def get_twitter_data():
 @app.route('/api/instagram', methods=['POST'])
 def get_instagram_data():
     input_data = prepare_request(app, request)
-    output_data = get_instagram(input_data['instagram'], input_data['image'])
+    output_data = get_instagram(input_data['instagram'], input_data['image'], input_data['firstname'], input_data['lastname'], input_data['email'])
     return jsonify(output_data)
 
 # For show uploaded pictures
