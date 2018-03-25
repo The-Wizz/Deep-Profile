@@ -9,6 +9,7 @@ from instagram_private_api import Client, ClientCompatPatch
 
 import urllib
 import face_recognition
+import os
 from flask import jsonify
 
 def get_user_id(username):
@@ -41,6 +42,19 @@ def get_instagram(input_instagram, input_path_to_known_picture, input_firstname,
         path_to_download = root_download_path + input_firstname + "-" + input_lastname + "-" + input_email + str(counter) + ".jpg"
         urllib.urlretrieve(url_to_image, path_to_download)
         counter += 1
+        for known_face in known_faces:
+            try:
+                unknown_image = face_recognition.load_image_file(path_to_download)
+            except IOError:
+                break
+            unknown_faces = face_recognition.face_encodings(unknown_image)
+            wasnt_found = True
+            for unknown_face in unknown_faces:
+                result = face_recognition.compare_faces([known_face], unknown_face)
+                if True in result:
+                    wasnt_found = False
+            if wasnt_found:
+                os.remove(path_to_download)
 
     output_data = {}
     output_data["pictures"]=imagesURL
