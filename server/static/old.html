@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>My first Bootstrap-Vue app</title>
+
+    <!-- Required Stylesheets -->
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+
+    <style>
+        html,
+        body,
+        div#app,
+        .h100 {
+            height: 100%;
+        }
+
+        #linkedin,
+        #facebook,
+        #twitter {
+            padding: 30px;
+            border-bottom: 1px solid black
+        }
+
+        #instagram {
+            padding: 30px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <b-row class="h100">
+            <b-col cols="4" style="border-right: 1px solid black;" class="h100">
+                <b-container style="margin-top: 30px;" class="h100">
+                    <h1>
+                        Golden Profile
+                    </h1>
+                    <b-form @submit="onSubmit">
+                        <b-form-group label="First name">
+                            <b-form-input v-model.trim="form.firstname" value="Florian"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Last name">
+                            <b-form-input v-model.trim="form.lastname" value="Rusch"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="E-Mail Address">
+                            <b-form-input v-model.trim="form.email" value="fubar@test.de"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Birthday">
+                            <b-form-input v-model.trim="form.birthday"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Keywords">
+                            <b-form-input v-model.trim="form.keywords"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Address">
+                            <b-form-input v-model.trim="form.address"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Instagram Name">
+                            <b-form-input v-model.trim="form.instagram"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label="Image">
+                            <b-form-file v-model.trim="form.image" accept="image/*"></b-form-file>
+                        </b-form-group>
+                        <b-form-group>
+                            <b-button type="submit">Submit</b-button>
+                        </b-form-group>
+                        * Required
+                    </b-form>
+                </b-container>
+            </b-col>
+            <b-col cols="8">
+
+                <div id="linkedin">
+                    <h2>Linkedin</h2>
+                    {{ linkedin | pretty }}
+                </div>
+                <div id="facebook">
+                    <h2>Facebook</h2>
+                    {{ facebook | pretty }}
+                </div>
+                <div id="twitter">
+                    <h2>Twitter</h2>
+                    {{ twitter | pretty }}
+                    <div v-if="twitter">
+                        <div v-for="(item, index) in twitter.linksToPictures">
+                            {{ item }}
+                        </div>
+                    </div>
+                </div>
+                <div id="instagram">
+                    <h2>Instagram</h2>
+                    {{ instagram | pretty }}
+                </div>
+            </b-col>
+        </b-row>
+    </div>
+
+
+        <!-- Required scripts -->
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+        <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/http-vue-loader"></script>
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+
+
+        <!-- Start running your app -->
+        <script>
+            window.app = new Vue({
+                el: "#app",
+
+                data: {
+                    form: {
+                        firstname: "",
+                        lastname: "",
+                        email: "",
+                        birthday: "",
+                        keywords: "",
+                        address: "",
+                        instagram: "",
+                        image: ""
+                    },
+                    twitter: {},
+                    facebook: {},
+                    instagram: {},
+                    linkedin: {}
+                },
+
+                methods: {
+                    onSubmit(evt) {
+                        evt.preventDefault();
+
+                        let formData = new FormData();
+
+                        formData.append('firstname', this.form.firstname);
+                        formData.append('lastname', this.form.lastname);
+                        formData.append('email', this.form.email);
+                        formData.append('birthday', this.form.birthday);
+                        formData.append('keywords', this.form.keywords);
+                        formData.append('address', this.form.address);
+                        formData.append('instagram', this.form.instagram);
+                        formData.append('image', this.form.image);
+
+
+                        axios.post("http://127.0.0.1:5000/api/facebook", formData)
+                        .then(response => {
+                            this.facebook = response.data
+                        })
+                        .catch(e => {
+                            console.error(e)
+                        })
+
+
+                        axios.post("http://127.0.0.1:5000/api/twitter", formData)
+                        .then(response => {
+                            this.twitter = response.data
+                        })
+                        .catch(e => {
+                            console.error(e)
+                        })
+
+
+                        axios.post("http://127.0.0.1:5000/api/linkedin", formData)
+                        .then(response => {
+                            this.linkedin = response.data
+                        })
+                        .catch(e => {
+                            console.error(e)
+                        })
+
+
+                        axios.post("http://127.0.0.1:5000/api/instagram", formData)
+                        .then(response => {
+                            this.instagram = response.data
+                        })
+                        .catch(e => {
+                            console.error(e)
+                        })
+                    }
+                },
+
+                filters: {
+                  pretty: function(value) {
+                    return JSON.stringify(value, null, 2);
+                  }
+                }
+            })
+        </script>
+</body>
+</html>
