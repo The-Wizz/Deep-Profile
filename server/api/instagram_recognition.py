@@ -1,5 +1,5 @@
 import os
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from flask import jsonify
 
@@ -37,7 +37,7 @@ def get_instagram(input_instagram, input_path_to_known_picture, input_firstname,
     for url_to_image in imagesURL[:]:
         path_to_download = root_download_path + input_firstname + "-" + \
             input_lastname + "-" + input_email + str(counter) + ".jpg"
-        urllib.urlretrieve(url_to_image, path_to_download)
+        urllib.request.urlretrieve(url_to_image, path_to_download)
         counter += 1
         for known_face in known_faces:
             try:

@@ -1,9 +1,9 @@
 import tweepy
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import face_recognition
 import os
 from flask import jsonify
-from tweepy_connection_helper import initialize_api
+from .tweepy_connection_helper import initialize_api
 
 def get_twitter(input_first_name, input_last_name, input_email, input_path_to_known_picture):
 
@@ -17,7 +17,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
     known_faces = face_recognition.face_encodings(known_image)
 
     for current_searching_user in users:
-        print current_searching_user.name
+        print(current_searching_user.name)
 
         url = current_searching_user.profile_image_url
 
@@ -25,7 +25,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
 
         path_to_unknown_picture = input_first_name + "-" + input_last_name + "-" + "twitter" + ".jpg"
 
-        urllib.urlretrieve(url, path_to_unknown_picture)
+        urllib.request.urlretrieve(url, path_to_unknown_picture)
         unknown_image = face_recognition.load_image_file(path_to_unknown_picture)
 
         is_done = False
@@ -35,7 +35,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
             for recognized_face_unknown_face in face_recognition.face_encodings(unknown_image):
                 result = face_recognition.compare_faces([recognized_face_know_face], recognized_face_unknown_face)
                 if result:
-                    print result
+                    print(result)
                     found_user = current_searching_user
                     is_done = True
                     break
@@ -54,7 +54,7 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
             if(len(media) > 0):
                 media_files.append(media[0]['media_url'])
                 path_to_download = root_download_path + input_first_name + "-" + input_last_name + "-" + str(counter) + ".jpg"
-                urllib.urlretrieve(media[0]['media_url'], path_to_download)
+                urllib.request.urlretrieve(media[0]['media_url'], path_to_download)
                 counter += 1
                 was_not_found = True
                 for known_face in known_faces:
@@ -70,9 +70,9 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
                 if was_not_found:
                     os.remove(path_to_download)
                     media_files.remove(media[0]['media_url'])
-                print str(len(media_files))
+                print(str(len(media_files)))
                 if len(media_files) is 20:
-                    print "maximum of 20 reached"
+                    print("maximum of 20 reached")
                     break
 
 
@@ -85,5 +85,5 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
         output_data['linksToPictures'] = media_files
         output_data['tweets'] = tweets
         for tw in tweets:
-            print tw
+            print(tw)
     return output_data
