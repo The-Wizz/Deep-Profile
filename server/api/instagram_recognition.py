@@ -1,15 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Mar 24 23:35:51 2018
+import os
+import urllib
 
-@author: hoang
-"""
+from flask import jsonify
+
+import face_recognition
 from instagram_private_api import Client, ClientCompatPatch
 
-import urllib
-import face_recognition
-import os
-from flask import jsonify
 
 def get_user_id(username):
     import requests
@@ -23,33 +19,37 @@ def get_instagram(input_instagram, input_path_to_known_picture, input_firstname,
     password = 'opencodes'
     api = Client(user_name, password)
 
-    user_id  = get_user_id(input_instagram)
+    user_id = get_user_id(input_instagram)
     items = api.user_feed(user_id)['items']
-    
+
     imagesURL = []
-    for count,item in enumerate(items):
+    for count, item in enumerate(items):
         image_versions2 = item['image_versions2']['candidates']
         image_url = image_versions2[0]['url']
         imagesURL.append(image_url)
 
-    known_image = face_recognition.load_image_file("../" + input_path_to_known_picture)
+    known_image = face_recognition.load_image_file(
+        "../" + input_path_to_known_picture)
     known_faces = face_recognition.face_encodings(known_image)
     root_download_path = "./instagram-downloads/"
 
     counter = 0
     for url_to_image in imagesURL[:]:
-        path_to_download = root_download_path + input_firstname + "-" + input_lastname + "-" + input_email + str(counter) + ".jpg"
+        path_to_download = root_download_path + input_firstname + "-" + \
+            input_lastname + "-" + input_email + str(counter) + ".jpg"
         urllib.urlretrieve(url_to_image, path_to_download)
         counter += 1
         for known_face in known_faces:
             try:
-                unknown_image = face_recognition.load_image_file(path_to_download)
+                unknown_image = face_recognition.load_image_file(
+                    path_to_download)
             except IOError:
                 break
             unknown_faces = face_recognition.face_encodings(unknown_image)
             wasnt_found = True
             for unknown_face in unknown_faces:
-                result = face_recognition.compare_faces([known_face], unknown_face)
+                result = face_recognition.compare_faces(
+                    [known_face], unknown_face)
                 if True in result:
                     wasnt_found = False
             if wasnt_found:
@@ -57,6 +57,5 @@ def get_instagram(input_instagram, input_path_to_known_picture, input_firstname,
                 os.remove(path_to_download)
 
     output_data = {}
-    output_data["pictures"]=imagesURL
+    output_data["pictures"] = imagesURL
     return output_data
-

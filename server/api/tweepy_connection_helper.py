@@ -1,5 +1,6 @@
 import tweepy
 
+
 def initialize_api():
     CONSUMER_KEY = "ZNLbPgqfFy7xzhvQXQBt2wYh9"
     CONSUMER_SECRET = "uV6ZPfmESiLPdXxlOaIb6TXLOs388ARksI9mpQBoNOgNyQkesK"
