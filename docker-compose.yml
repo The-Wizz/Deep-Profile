@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  goldenprofile:
+    image: goldenprofile
+    build: .
+    volumes:
+      - ./.pip-cache/:/root/.cache/pip/
+    ports:
+      - 3000:3000
+    # networks:
+    #   - goldenprofile-net
+
+#   nginx:
+#     image: goldenprofile-frontend
+#     build: ./frontend/
+#     volumes:
+#       - ./frontend/:/usr/share/nginx/html
+#       - .logs/nginx/:/var/log/nginx
+#     ports:
+#       - 80:80
+#       - 443:443
+#     environment:
+#       DH_SIZE: 512
+#     networks:
+#       - goldenprofile-net
+
+# networks:
+#   goldenprofile-net:
