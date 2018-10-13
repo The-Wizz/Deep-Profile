@@ -1,9 +1,9 @@
 # _GoldenProfile_
 
-- [_GoldenProfile_](#goldenprofile)
+- [_GoldenProfile_](#_goldenprofile_)
   - [Motivation](#motivation)
-  - [Ziel von _GoldenProfile_](#ziel-von-goldenprofile)
-  - [Mögliche Use-Cases](#m%C3%B6gliche-use-cases)
+  - [Ziel von _GoldenProfile_](#ziel-von-_goldenprofile_)
+  - [Mögliche Use-Cases](#mögliche-use-cases)
   - [Technischer Ansatz](#technischer-ansatz)
       - [Datensammlung](#datensammlung)
       - [Datenaggregation](#datenaggregation)
@@ -14,11 +14,11 @@
 
 ## Motivation
 
-Heutzutage geben die meisten Menschen sämtliche Informationen über sich im Internet preis, ohne sich Gedanken darüber zu machen, wer alles auf diese Daten zugreifen kann. Inzwischen ist es möglich, anhand von ein paar wenigen Daten im Internet sehr viel über einen Menschen herauszufinden.
+Heutzutage veröffentlichen die meisten Menschen viele Informationen über sich im Internet, ohne sich Gedanken darüber zu machen, wer alles auf diese Daten zugreifen kann, wenn diese nicht ausreichend gesichert sind. Inzwischen ist es möglich, anhand von ein paar wenigen Daten im Internet sehr viel über einen Menschen herauszufinden.
 
 ## Ziel von _GoldenProfile_
 
-Mit dem Projekt _GoldenProfile_ soll ein Tool geschaffen werden, das auf Basis einiger weniger Stammdaten, wie zum Beispiel dem Namen und das Geburtsdatum einer Person, im Internet nach weiteren Daten sucht. Durchsucht werden hierbei neben den vorhandenen Social Media Netzwerken, auch Zeitungen und diverse weitere Internetplattformen. Ist der Crawling-Vorgang abgeschlossen, werden die Daten aufbereitet, aggregiert und dem Anwender zur Verfügung gestellt.
+Mit dem Projekt _GoldenProfile_ soll ein Tool geschaffen werden, das auf Basis einiger weniger Stammdaten, wie zum Beispiel dem Namen und das Geburtsdatum einer Person, im Internet nach weiteren Daten sucht. Durchsucht werden hierbei, neben den vorhandenen Social Media Netzwerken, auch Zeitungen und diverse weitere Internetplattformen. Ist der Scraping-Vorgang abgeschlossen, werden die Daten aufbereitet, aggregiert und dem Anwender zur Verfügung gestellt.
 
 ## Mögliche Use-Cases
 
@@ -77,12 +77,12 @@ Weitere Plattformen:
 
 ## Datenschutz/Rechtliche Fragestellungen
 
-- Dürfen öffentliche bzw. personenbezogene Daten gescraped werden?
-- Dürfen personenbezogene Daten von einer API-Schnittstelle gescraped werden?
+- Dürfen öffentliche personenbezogene Daten gescraped werden?
+- Dürfen personenbezogene Daten von einer nicht öffentlichen API-Schnittstelle gescraped werden?
 - Dürfen die Daten auf unseren Servern gespeichert werden?
 - Dürfen die Daten auf unseren Servern verarbeitet werden?
-- Dürfen die Daten auf gemieteten Servern gespeichert werden?
-- Dürfen die Daten auf gemieteten Servern verarbeitet werden?
+- Dürfen die Daten auf extern gemieteten Servern gespeichert werden?
+- Dürfen die Daten auf extern gemieteten Servern verarbeitet werden?
 - Dürfen die Daten im Rahmen einer öffentlichen Webanwendung, für andere Benutzer dargestellt werden?
 - Dürfen die Daten im Rahmen einer geschlossenen Webanwendung, für Unternehmen dargestellt werden?
 - Dürfen Unternehmen die Applikation nutzen, um bereits existierende Nutzerdaten anzureichern?

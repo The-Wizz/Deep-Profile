@@ -1,8 +1,8 @@
 # _GoldenProfile_
 
-- [_GoldenProfile_](#goldenprofile)
+- [_GoldenProfile_](#_goldenprofile_)
   - [Motivation](#motivation)
-  - [Goal of _GoldenProfile_](#goal-of-goldenprofile)
+  - [Goal of _GoldenProfile_](#goal-of-_goldenprofile_)
   - [Possible Use Cases](#possible-use-cases)
   - [Technical approach](#technical-approach)
     - [Data collection](#data-collection)
@@ -14,11 +14,11 @@
 
 ## Motivation
 
-Nowadays, most people disclose all information about themselves on the Internet without worrying about who has access to this data. It is possible to find out a lot about a person with just a few data on the Internet.
+Nowadays, most people publish information about themselves on the Internet without worrying that everybody has access to this data, if it is not properly secured. This leads to the possibility to get a lot of information about a person by given input data.
 
 ## Goal of _GoldenProfile_
 
-With the project _GoldenProfile_ a tool is to be created, which searches the Internet for further data on the basis of a few master data, such as the name and date of birth of a person. In addition to the existing social media networks, newspapers and various other Internet platforms are also searched. Once the crawling process is complete, the data is prepared, aggregated and made available to the user.
+With _GoldenProfile_ a tool is going to be created which searches the Internet for more information about a person, based on given master data, such as the name and date of birth of a person. In addition to the existing social media networks, newspapers and various other Internet platforms will also be searched. Once the crawling process is complete, the data is prepared, aggregated and given back to the user.
 
 ## Possible Use Cases
 
@@ -38,7 +38,7 @@ Usually, the various platforms and social media networks provide interfaces thro
 
 ### Data aggregation
 
-The entered data is enriched with the obtained information in several runs and reused for a data collection. This process is repeated until no new data is collected.
+The input data is enriched with the obtained information in several runs and with each run the newly gathered information is used to improve the next procedure. This process is repeated until no new data is collected.
 
 ### Data presentation
 
@@ -75,12 +75,12 @@ Other platforms:
 
 ## Data Protection/Legal Issues
 
-- Is it allowed to scrape public or personal data?
-- Is it allowed to scrape personal data from an API interface?
+- Is it allowed to scrape public personal data?
+- Is it allowed to scrape personal data from a non public API interface?
 - Is it allowed to store the data on our servers?
 - Is it allowed to process the data on our servers?
-- Is it allowed to store the data on rented servers?
-- Is it allowed to process the data on rented servers?
+- Is it allowed to store the data on external rented servers?
+- Is it allowed to process the data on external rented servers?
 - Is it allowed to display the data for other users within the scope of a public web application?
 - Is it allowed to display the data in a closed web application for companies?
 - Is it allowed for companies to use the application to enrich existing user data?
