@@ -4,8 +4,6 @@ services:
   goldenprofile:
     image: goldenprofile
     build: .
-    volumes:
-      - ./.pip-cache/:/root/.cache/pip/
     ports:
       - 3000:3000
     # networks:
