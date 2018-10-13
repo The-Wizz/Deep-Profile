@@ -1,9 +1,12 @@
-# GoldenProfile
+# _GoldenProfile_
 
 ## Run application
 
-1. make sure you have python3 installed (`python3 --version`)
-2. move to the server directory
-3. call `python3 run.py`
+1. Make sure you have python3 installed (`python3 --version`)
+2. Move to the server directory
+3. Pull all dependencies (`pip3 install -r requirements.txt`)
+3. Run the server (`python3 run.py`)
 
-If there're are any missing packages, it's recommended to download them manually because some of the packages listed in the _requirements.txt_ are depricated
+> ⚠️ Attention ⚠️
+>
+> If there're are any missing packages, it's recommended to download them manually because some of the packages listed in the _requirements.txt_ are depricated
