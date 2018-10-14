@@ -19,7 +19,6 @@ The first `docker-compose up` can take some while. There are some heavy dependen
 
 After the containers are running you can find the ui under this URL: [http://localhost](http://localhost)
 
-
 > If you changed something in the docker images you have to build the images again (`docker-compose build`). You don't have to rebuild if you only change the source code of the application itself - in this
 
 ## Run application local without Docker

@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css" />
     <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
 
 
     <style>
@@ -414,19 +414,19 @@
 
             var formData = new FormData();
             formData.append('firstname', $("#inpFirstname").val());
-            formData.append('lastname',  $("#inpLastname").val());
-            formData.append('email',  $("#inpEmail").val());
-            formData.append('birthday',  $("#inpBirthday").val());
-            formData.append('keywords',  $("#inpKeywords").val());
-            formData.append('address',  $("#inpAddress").val());
-            formData.append('instagram',  $("#inpInstagram").val());
+            formData.append('lastname', $("#inpLastname").val());
+            formData.append('email', $("#inpEmail").val());
+            formData.append('birthday', $("#inpBirthday").val());
+            formData.append('keywords', $("#inpKeywords").val());
+            formData.append('address', $("#inpAddress").val());
+            formData.append('instagram', $("#inpInstagram").val());
             //formData.append('instagram', 'florianrusch9297');
-            formData.append('image',  $("#inpImage")[0].files[0]);
+            formData.append('image', $("#inpImage")[0].files[0]);
 
             $("#welcomePanel").addClass("dn");
             $("#outputPanel").removeClass("dn");
 
-            setTimeout(function(){
+            setTimeout(function () {
                 $("#linkedinLoader").addClass("dn");
                 $("#linkedinData").removeClass("dn");
             }, 25000);
@@ -440,7 +440,7 @@
                 contentType: false,
                 success: function (data) {
                     var imageGalerie = "";
-                    data.linksToPictures.forEach(function(ele) {
+                    data.linksToPictures.forEach(function (ele) {
                         imageGalerie += '<div class="item">' +
                             '<div class="img-fill">' +
                                 '<img src="' + ele + '" alt="" height="300">' +
@@ -472,41 +472,41 @@
                     var tweetsHTML = "";
                     var counter = 0,
                         regex = //g;
-                    data.tweets.forEach(function(ele) {
-                        if (counter >= 20) {
-                            return -1;
-                        }
+                        data.tweets.forEach(function (ele) {
+                            if (counter >= 20) {
+                                return -1;
+                            }
 
-                        ele = ele.replace(/((\w+:\/\/)[-a-zA-Z0-9:@;?&=\/%\+\.\*!'\(\),\$_\{\}\^~\[\]`#|]+)/, '<a href="$1" target="_blank">$1</a>');
-                        var aHashtags = ele.match(/(\#[a-zA-Z0-9_%]*)/);
-                        var aMentions = ele.match(/\B@[a-zA-Z0-9_-]+/);
+                            ele = ele.replace(/((\w+:\/\/)[-a-zA-Z0-9:@;?&=\/%\+\.\*!'\(\),\$_\{\}\^~\[\]`#|]+)/, '<a href="$1" target="_blank">$1</a>');
+                            var aHashtags = ele.match(/(\#[a-zA-Z0-9_%]*)/);
+                            var aMentions = ele.match(/\B@[a-zA-Z0-9_-]+/);
 
-                        if (aHashtags) {
-                            aHashtags.forEach(function(hashtag) {
-                                var text = hashtag.substring(1);
-                                ele = ele.replace(/ + hashtag + /g, '<a href="https://twitter.com/hashtag/' + text + '" target="_blank">' + hashtag + '</a>');
-                            });
-                        }
+                            if (aHashtags) {
+                                aHashtags.forEach(function (hashtag) {
+                                    var text = hashtag.substring(1);
+                                    ele = ele.replace(/ + hashtag + /g, '<a href="https://twitter.com/hashtag/' + text + '" target="_blank">' + hashtag + '</a>');
+                                });
+                            }
 
-                        if (aMentions) {
-                            aMentions.forEach(function(mention) {
-                                var text = mention.substring(1);
-                                ele = ele.replace(/ + mention + /g, '<a href="https://twitter.com/' + text + '" target="_blank">' + mention + '</a>');
-                            });
-                        }
+                            if (aMentions) {
+                                aMentions.forEach(function (mention) {
+                                    var text = mention.substring(1);
+                                    ele = ele.replace(/ + mention + /g, '<a href="https://twitter.com/' + text + '" target="_blank">' + mention + '</a>');
+                                });
+                            }
 
-                        tweetsHTML += '<div class="col-3">' +
-                            '<div style="border-bottom: 1px solid lightgray; padding: 20px 0; margin: 0 10px; font-size: 18px;">' +
+                            tweetsHTML += '<div class="col-3">' +
+                                '<div style="border-bottom: 1px solid lightgray; padding: 20px 0; margin: 0 10px; font-size: 18px;">' +
                                 ele +
-                            '</div>' +
-                        '</div>';
-                        counter++
-                    });
+                                '</div>' +
+                                '</div>';
+                            counter++
+                        });
 
                     $('#twitterTweets').html(tweetsHTML);
 
                     // Display data
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $('#twitterLoader').addClass('dn');
                         $('#twitterData').removeClass('dn');
                     }, 6000);
@@ -522,7 +522,7 @@
                 contentType: false,
                 success: function (data) {
                     var imageGalerie = "";
-                    data.pictures.forEach(function(element) {
+                    data.pictures.forEach(function (element) {
                         imageGalerie += '<div class="item">' +
                             '<div class="img-fill">' +
                                 '<img src="' + element + '" alt="" height="300">' +
@@ -546,7 +546,7 @@
                     });
 
                     // Display data
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $('#instagramLoader').addClass('dn');
                         $('#instagramData').removeClass('dn');
                     }, 6000);
