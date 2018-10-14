@@ -17,7 +17,12 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './uploads'
 
 
-# Example
+# TODO remove this
+@app.route('/api/hello')
+def get_hello():
+    return "hallo"
+
+
 # TODO remove this
 @app.route('/api/hello', methods=['POST'])
 def post_hello():
@@ -48,4 +53,5 @@ def uploaded_file(filename):
 
 # Initiate flask
 if __name__ == '__main__':
-    app.run(debug=True)
+    # As long as debug=True is set it is possible to hot-reload
+    app.run(host='0.0.0.0', port=8080, debug=True)
