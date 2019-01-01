@@ -57,6 +57,7 @@ jobs:
       - run:
           name: Login into docker registry
           command: |
+            echo "echo \"$DOCKER_PWD\" | docker login -u $DOCKER_LOGIN --password-stdin"
             echo "$DOCKER_PWD" | docker login -u $DOCKER_LOGIN --password-stdin
       - restore_cache:
           keys:
@@ -95,5 +96,5 @@ workflows:
   version: 2
   test:
     jobs:
-      - dockerize-server
+      # - dockerize-server
       - dockerize-frontend
