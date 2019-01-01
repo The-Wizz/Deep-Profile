@@ -12,8 +12,7 @@ jobs:
       - run:
           name: Login into docker registry
           command: |
-            env
-            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            echo "$DOCKER_PWD" | docker login -u $DOCKER_LOGIN --password-stdin
       - restore_cache:
           keys:
             - v1-{{ .Branch }}
@@ -58,7 +57,7 @@ jobs:
       - run:
           name: Login into docker registry
           command: |
-            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            echo "$DOCKER_PWD" | docker login -u $DOCKER_LOGIN --password-stdin
       - restore_cache:
           keys:
             - v1-{{ .Branch }}
