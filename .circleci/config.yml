@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Login into docker registry
           command: |
-            docker login
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin registry.gitlab.com
       - restore_cache:
           keys:
             - v1-{{ .Branch }}
@@ -88,8 +88,8 @@ jobs:
       - deploy:
           name: Push application Docker image
           command: |
-            docker tag ${IMAGE_NAME} "thewizz/${IMAGE_NAME}:${CIRCLE_SHA1}"
-            docker push "thewizz/${IMAGE_NAME}:${CIRCLE_SHA1}"
+            docker tag ${IMAGE_NAME} "registry.gitlab.com/the-wizz/deep-profile-registry/${IMAGE_NAME}:${CIRCLE_SHA1}"
+            docker push "registry.gitlab.com/the-wizz/deep-profile-registry/${IMAGE_NAME}:${CIRCLE_SHA1}"
 
 workflows:
   version: 2
