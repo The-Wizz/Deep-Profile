@@ -1,99 +1,68 @@
 version: 2
 
+dockerize: &DOCKERIZE
+  docker:
+    - image: docker:18.06.1-ce-git
+  steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: Login into docker registry
+        command: |
+          echo ${DOCKER_PWD} | docker login -u ${DOCKER_LOGIN} --password-stdin ${REGISTRY}
+    - restore_cache:
+        keys:
+          - v1-{{ .Branch }}
+        paths:
+          - /caches/${IMAGE_NAME}.tar
+    - run:
+        name: Load Docker image layer cache
+        command: |
+          set +o pipefail
+          docker load -i /caches/${IMAGE_NAME}.tar | true
+    - run:
+        name: Build application Docker image
+        command: |
+          docker build --cache-from=${IMAGE_NAME} -t ${IMAGE_NAME} ${APP_SOURCE}
+    - run:
+        name: Save Docker image layer cache
+        command: |
+          mkdir -p /caches
+          docker save -o /caches/${IMAGE_NAME}.tar ${IMAGE_NAME}
+    - save_cache:
+        key: v1-{{ .Branch }}-{{ epoch }}
+        paths:
+          - /caches/${IMAGE_NAME}.tar
+    # - run:
+    #     name: Run tests
+    #     command: |
+    #       docker-compose -f ./docker-compose.test.yml up
+    - deploy:
+        name: Push application Docker image
+        command: |
+          docker tag ${IMAGE_NAME} "${REGISTRY}${IMAGE_PATH}/${IMAGE_NAME}:${CIRCLE_SHA1}"
+          docker push "${REGISTRY}${IMAGE_PATH}/${IMAGE_NAME}:${CIRCLE_SHA1}"
+
 jobs:
   dockerize-server:
-    docker:
-      - image: docker:18.06.1-ce-git
+    <<: *DOCKERIZE
     environment:
+      APP_SOURCE: ./server
+      REGISTRY: registry.gitlab.com
+      IMAGE_PATH: /the-wizz/deep-profile-registry
       IMAGE_NAME: deep-profile-server
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Login into docker registry
-          command: |
-            echo "$DOCKER_PWD" | docker login -u $DOCKER_LOGIN --password-stdin
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
-          paths:
-            - /caches/${IMAGE_NAME}.tar
-      - run:
-          name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            docker load -i /caches/${IMAGE_NAME}.tar | true
-      - run:
-          name: Build application Docker image
-          command: |
-            docker build --cache-from=${IMAGE_NAME} -t ${IMAGE_NAME} ./server
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/${IMAGE_NAME}.tar ${IMAGE_NAME}
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/${IMAGE_NAME}.tar
-      # - run:
-      #     name: Run tests
-      #     command: |
-      #       docker-compose -f ./docker-compose.test.yml up
-      - deploy:
-          name: Push application Docker image
-          command: |
-            docker tag ${IMAGE_NAME} "thewizz/${IMAGE_NAME}:${CIRCLE_SHA1}"
-            docker push "thewizz/${IMAGE_NAME}:${CIRCLE_SHA1}"
 
   dockerize-frontend:
-    docker:
-      - image: docker:18.06.1-ce-git
+    <<: *DOCKERIZE
     environment:
+      APP_SOURCE: ./frontend
+      REGISTRY: registry.gitlab.com
+      IMAGE_PATH: /the-wizz/deep-profile-registry
       IMAGE_NAME: deep-profile-frontend
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Login into docker registry
-          command: |
-            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin registry.gitlab.com
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
-          paths:
-            - /caches/${IMAGE_NAME}.tar
-      - run:
-          name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            docker load -i /caches/${IMAGE_NAME}.tar | true
-      - run:
-          name: Build application Docker image
-          command: |
-            docker build --cache-from=${IMAGE_NAME} -t ${IMAGE_NAME} ./frontend
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/${IMAGE_NAME}.tar ${IMAGE_NAME}
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/${IMAGE_NAME}.tar
-      # - run:
-      #     name: Run tests
-      #     command: |
-      #       docker-compose -f ./docker-compose.test.yml up
-      - deploy:
-          name: Push application Docker image
-          command: |
-            docker tag ${IMAGE_NAME} "registry.gitlab.com/the-wizz/deep-profile-registry/${IMAGE_NAME}:${CIRCLE_SHA1}"
-            docker push "registry.gitlab.com/the-wizz/deep-profile-registry/${IMAGE_NAME}:${CIRCLE_SHA1}"
 
 workflows:
   version: 2
   test:
     jobs:
-      # - dockerize-server
+      - dockerize-server
       - dockerize-frontend
