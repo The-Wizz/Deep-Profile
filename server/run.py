@@ -29,7 +29,13 @@ def hello():
 
 @app.route('/api/twitter', methods=['POST'])
 def get_twitter_data():
+    print("input data twitter")
+    print("")
+    print("")
     input_data = prepare_request(app, request)
+    print(input_data)
+    print("")
+    print("")
     output_data = get_twitter(
         input_data['firstname'], input_data['lastname'], input_data['email'], input_data['image'])
     return jsonify(output_data)
