@@ -9,11 +9,15 @@ RUN apk update && \
     rm -rf /var/cache/apk/* /tmp/* /usr/share/man
 
 # Configure nginx + php
-ADD nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /nginx.conf.template
+
+# Add docker-entrypoint.sh script which will be called when the container starts
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["nginx", "-g", "daemon off;"]
 
 WORKDIR /usr/share/nginx/html
 
 EXPOSE 80
-EXPOSE 443
+# EXPOSE 443
