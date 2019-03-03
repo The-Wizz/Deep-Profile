@@ -432,86 +432,87 @@
             }, 25000);
 
 
-            jQuery.ajax({
-                type: "POST",
-                url: "/api/twitter",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-                    var imageGalerie = "";
-                    data.linksToPictures.forEach(function (ele) {
-                        imageGalerie += '<div class="item">' +
-                            '<div class="img-fill">' +
-                                '<img src="' + ele + '" alt="" height="300">' +
-                            '</div>' +
-                        '</div>';
-                    });
+            // jQuery.ajax({
+            //     type: "POST",
+            //     url: "/api/twitter",
+            //     data: formData,
+            //     processData: false,
+            //     contentType: false,
+            //     timeout: 6000000000,
+            //     success: function (data) {
+            //         var imageGalerie = "";
+            //         data.linksToPictures.forEach(function (ele) {
+            //             imageGalerie += '<div class="item">' +
+            //                 '<div class="img-fill">' +
+            //                     '<img src="' + ele + '" alt="" height="300">' +
+            //                 '</div>' +
+            //             '</div>';
+            //         });
 
-                    $("#twitterImages").html(imageGalerie);
+            //         $("#twitterImages").html(imageGalerie);
 
-                    $("#twitterImages").slick({
-                        speed: 5000,
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        centerMode: true,
-                        centerPadding: '60px',
-                        cssEase: 'linear',
-                        draggable: true,
-                        autoplay: true,
-                        autoplaySpeed: 0,
-                        variableWidth: true,
-                    });
+            //         $("#twitterImages").slick({
+            //             speed: 5000,
+            //             slidesToShow: 3,
+            //             slidesToScroll: 1,
+            //             centerMode: true,
+            //             centerPadding: '60px',
+            //             cssEase: 'linear',
+            //             draggable: true,
+            //             autoplay: true,
+            //             autoplaySpeed: 0,
+            //             variableWidth: true,
+            //         });
 
-                    $("#twitterCreation").html(data.creation_date);
-                    $("#twitterFollower").html(data.number_of_followers);
-                    $("#twitterLocation").html(data.location);
-                    $("#twitterDescription").html(data.profile_description);
+            //         $("#twitterCreation").html(data.creation_date);
+            //         $("#twitterFollower").html(data.number_of_followers);
+            //         $("#twitterLocation").html(data.location);
+            //         $("#twitterDescription").html(data.profile_description);
 
 
-                    var tweetsHTML = "";
-                    var counter = 0,
-                        regex = //g;
-                        data.tweets.forEach(function (ele) {
-                            if (counter >= 20) {
-                                return -1;
-                            }
+            //         var tweetsHTML = "";
+            //         var counter = 0,
+            //             regex = //g;
+            //             data.tweets.forEach(function (ele) {
+            //                 if (counter >= 20) {
+            //                     return -1;
+            //                 }
 
-                            ele = ele.replace(/((\w+:\/\/)[-a-zA-Z0-9:@;?&=\/%\+\.\*!'\(\),\$_\{\}\^~\[\]`#|]+)/, '<a href="$1" target="_blank">$1</a>');
-                            var aHashtags = ele.match(/(\#[a-zA-Z0-9_%]*)/);
-                            var aMentions = ele.match(/\B@[a-zA-Z0-9_-]+/);
+            //                 ele = ele.replace(/((\w+:\/\/)[-a-zA-Z0-9:@;?&=\/%\+\.\*!'\(\),\$_\{\}\^~\[\]`#|]+)/, '<a href="$1" target="_blank">$1</a>');
+            //                 var aHashtags = ele.match(/(\#[a-zA-Z0-9_%]*)/);
+            //                 var aMentions = ele.match(/\B@[a-zA-Z0-9_-]+/);
 
-                            if (aHashtags) {
-                                aHashtags.forEach(function (hashtag) {
-                                    var text = hashtag.substring(1);
-                                    ele = ele.replace(/ + hashtag + /g, '<a href="https://twitter.com/hashtag/' + text + '" target="_blank">' + hashtag + '</a>');
-                                });
-                            }
+            //                 if (aHashtags) {
+            //                     aHashtags.forEach(function (hashtag) {
+            //                         var text = hashtag.substring(1);
+            //                         ele = ele.replace(/ + hashtag + /g, '<a href="https://twitter.com/hashtag/' + text + '" target="_blank">' + hashtag + '</a>');
+            //                     });
+            //                 }
 
-                            if (aMentions) {
-                                aMentions.forEach(function (mention) {
-                                    var text = mention.substring(1);
-                                    ele = ele.replace(/ + mention + /g, '<a href="https://twitter.com/' + text + '" target="_blank">' + mention + '</a>');
-                                });
-                            }
+            //                 if (aMentions) {
+            //                     aMentions.forEach(function (mention) {
+            //                         var text = mention.substring(1);
+            //                         ele = ele.replace(/ + mention + /g, '<a href="https://twitter.com/' + text + '" target="_blank">' + mention + '</a>');
+            //                     });
+            //                 }
 
-                            tweetsHTML += '<div class="col-3">' +
-                                '<div style="border-bottom: 1px solid lightgray; padding: 20px 0; margin: 0 10px; font-size: 18px;">' +
-                                ele +
-                                '</div>' +
-                                '</div>';
-                            counter++
-                        });
+            //                 tweetsHTML += '<div class="col-3">' +
+            //                     '<div style="border-bottom: 1px solid lightgray; padding: 20px 0; margin: 0 10px; font-size: 18px;">' +
+            //                     ele +
+            //                     '</div>' +
+            //                     '</div>';
+            //                 counter++
+            //             });
 
-                    $('#twitterTweets').html(tweetsHTML);
+            //         $('#twitterTweets').html(tweetsHTML);
 
-                    // Display data
-                    setTimeout(function () {
-                        $('#twitterLoader').addClass('dn');
-                        $('#twitterData').removeClass('dn');
-                    }, 6000);
-                }
-            });
+            //         // Display data
+            //         setTimeout(function () {
+            //             $('#twitterLoader').addClass('dn');
+            //             $('#twitterData').removeClass('dn');
+            //         }, 6000);
+            //     }
+            // });
 
 
             jQuery.ajax({
@@ -520,6 +521,7 @@
                 data: formData,
                 processData: false,
                 contentType: false,
+                timeout: 6000000000,
                 success: function (data) {
                     var imageGalerie = "";
                     data.pictures.forEach(function (element) {

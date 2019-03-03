@@ -11,7 +11,7 @@ LABEL name=goldenprofile_pythonbase \
       version=0.0.1 \
       maintainer="dev@florianrusch.de"
 
-RUN apt-get -y update \
+RUN apt-get -y update --no-install-recommends \
     && apt-get install -y --fix-missing \
         build-essential \
         cmake \
