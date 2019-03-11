@@ -12,43 +12,62 @@ def get_twitter(input_first_name, input_last_name, input_email, input_path_to_kn
 
     api = initialize_api()
 
-    users = api.search_users(input_first_name + " " + input_last_name)
+    pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+    for page in pages:
+        print(page)
+
+    def search_for_simon(users):
+        for possible_simon in users:
+            print(possible_simon.screen_name)
+            if possible_simon.screen_name == "Simon04839594":
+                print("found!")
+                return possible_simon
 
     found_user = None
 
-    known_image = face_recognition.load_image_file(
-        "./uploads/" + input_path_to_known_picture)
-    known_faces = face_recognition.face_encodings(known_image)
+    for current_page in pages:
+        users = api.search_users(input_first_name + " " + input_last_name, page=current_page) 
 
-    for current_searching_user in users:
-        print("current user: " + current_searching_user.name)
+        known_image = face_recognition.load_image_file(
+            "./uploads/" + input_path_to_known_picture)
+        known_faces = face_recognition.face_encodings(known_image)
 
-        url = current_searching_user.profile_image_url
+        """for current_searching_user in users:
+            print("current user: " + current_searching_user.name)
 
-        url = url.replace('_normal', '')
+            url = current_searching_user.profile_image_url
 
-        path_to_unknown_picture = input_first_name + "-" + \
-            input_last_name + "-" + "twitter" + ".jpg"
+            url = url.replace('_normal', '')
 
-        urllib.request.urlretrieve(url, path_to_unknown_picture)
-        unknown_image = face_recognition.load_image_file(
-            path_to_unknown_picture)
+            path_to_unknown_picture = input_first_name + "-" + \
+                input_last_name + "-" + "twitter" + ".jpg"
 
-        is_done = False
-        for recognized_face_know_face in known_faces:
-            print("isdone: " + str(is_done))
-            if is_done:
-                break
-            for recognized_face_unknown_face in face_recognition.face_encodings(unknown_image):
-                result = face_recognition.compare_faces(
-                    [recognized_face_know_face], recognized_face_unknown_face)
-                if result:
-                    print("result: " + str(result))
-                    found_user = current_searching_user
-                    is_done = True
+            urllib.request.urlretrieve(url, path_to_unknown_picture)
+            unknown_image = face_recognition.load_image_file(
+                path_to_unknown_picture)
+
+            is_done = False
+            for recognized_face_know_face in known_faces:
+                print("isdone: " + str(is_done))
+                if is_done:
                     break
+                for recognized_face_unknown_face in face_recognition.face_encodings(unknown_image):
+                    result = face_recognition.compare_faces(
+                        [recognized_face_know_face], recognized_face_unknown_face)
+                    if result:
+                        print("result: " + str(result))
+                        found_user = current_searching_user
+                        is_done = True
+                        break """
 
-    print(found_user)
+        found_user = search_for_simon(users)
+        if found_user:
+            break
+
+    print(found_user)            
+    
+
     root_download_path = "./twitter-downloads/"
     counter = 0
     output_data = {}
