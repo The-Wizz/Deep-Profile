@@ -89,7 +89,7 @@
                         </fieldset>
                         <fieldset role="group" class="b-form-group form-group">
                             <legend class="col-form-label pt-0">Instagram Name</legend>
-                            <input id="inpInstagram" type="text" class="form-control" value="florianrusch9297">
+                            <input id="inpInstagram" type="text" class="form-control">
                         </fieldset>
                         <fieldset role="group" class="b-form-group form-group">
                             <legend class="col-form-label pt-0">Image*</legend>
@@ -313,7 +313,7 @@
             formData.append('birthday',  $("#inpBirthday").val());
             formData.append('keywords',  $("#inpKeywords").val());
             formData.append('address',  $("#inpAddress").val());
-            formData.append('instagram',  $("#inpInstagram").val());
+            formData.append('instagram',  'florianrusch9297');
             //formData.append('instagram', 'florianrusch9297');
             formData.append('image',  $("#inpImage")[0].files[0]);
 
@@ -323,7 +323,7 @@
             setTimeout(function(){
                 $("#linkedinLoader").addClass("dn");
                 $("#linkedinData").removeClass("dn");
-            }, 1);
+            }, 10000);
 
 
             jQuery.ajax({
