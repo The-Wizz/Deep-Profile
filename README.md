@@ -10,3 +10,13 @@
 > ⚠️ Attention ⚠️
 >
 > If there're are any missing packages, it's recommended to download them manually because some of the packages listed in the _requirements.txt_ are depricated
+
+
+<https://gitlab.com/the-wizz/deep-profile-registry/container_registry>
+
+```shell
+docker login registry.gitlab.com
+docker-compose up -d
+```
+
+<http://localhost:8080/>
